@@ -5,5 +5,5 @@
  "MSCCmdFormat": "0x01",
  "MSCDeviceID": "1",
  "StopRepeats": true,
- "midiPort": 2
+ "midiPort": 0
 }
