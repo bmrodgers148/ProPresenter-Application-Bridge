@@ -1,0 +1,9 @@
+{
+ "IPAddress": "127.0.0.1",
+ "IPPort": 51246,
+ "Password": "display",
+ "MSCCmdFormat": "0x01",
+ "MSCDeviceID": "1",
+ "StopRepeats": true,
+ "midiPort": 2
+}
