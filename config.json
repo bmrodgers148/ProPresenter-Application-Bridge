@@ -1,6 +1,6 @@
 {
  "IPAddress": "127.0.0.1",
- "IPPort": 51246,
+ "IPPort": 12345,
  "Password": "display",
  "MSCCmdFormat": "0x01",
  "MSCDeviceID": "1",
