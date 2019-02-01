@@ -18,6 +18,7 @@ class ProData():
         self.prevNote = ''
         self.connectStatus = 'Disconnected'
         self.noteLog = []
+
         try:
             ConfigData_Filename = os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.json")
             ConfigData_JSON = open(ConfigData_Filename).read()
@@ -31,8 +32,30 @@ class ProData():
             self.midiPort = int(ConfigData['midiPort'])
 
         except Exception as e:
-            print("EXCEPTION: Cannot load and parse Config.JSON File: ")
+            print("EXCEPTION: Cannot load and parse Config.JSON File. Loading Default settings.")
             print(e)
+
+            self.ProP_IPAddress = '127.0.0.1'
+            self.ProP_IPPort = 12345
+            self.ProP_Password = 'display'
+            self.MSCCmdFormat = '0x01'
+            self.MSCDeviceID = '1'
+            self.StopRepeats = True
+            self.midiPort = 0
+
+            ConfigData_Filename = os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.json")
+            ConfigData = {}  
+            ConfigData['IPAddress'] =  self.ProP_IPAddress
+            ConfigData['IPPort'] = self.ProP_IPPort
+            ConfigData['Password'] = self.ProP_Password
+            ConfigData['MSCCmdFormat'] = self.MSCCmdFormat
+            ConfigData['MSCDeviceID'] = self.MSCDeviceID
+            ConfigData['StopRepeats'] = self.StopRepeats
+            ConfigData['midiPort'] = self.midiPort
+            ConfigData_JSON = open(ConfigData_Filename, 'w')
+            json.dump(ConfigData, ConfigData_JSON, indent=1)
+
+
         self.setupUi(MainWindow)
         self.connect()
         self.reconnect_tick()
@@ -329,8 +352,8 @@ class ProData():
     def quitProgram(self):
         
         self.ProPresenter.stop()
-        time.sleep(0.5)
-        exit()
+        time.sleep(0.15)
+        sys.exit()
 
 #pro = ProData()
 
