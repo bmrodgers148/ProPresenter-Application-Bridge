@@ -96,15 +96,16 @@ class ProPresenterStageDisplayClientComms(threading.Thread):
         while True:
             try:
                 thisData = self.sock.recv(1024)
+                thisData = thisData.decode('utf-8')
 
-                if thisData == "":
+                if thisData == '':
                     # Connection closed
                     self.sock.close()
                     self.doCallback("Disconnected", "")
                     return False
 
                 else:
-                    totalData += thisData.decode('utf-8')
+                    totalData += thisData
 
             except socket.error as e:
                 if e.args[0] != errno.EWOULDBLOCK:
