@@ -14,10 +14,11 @@ class ProData():
 
     def __init__(self, master = None):
 
-
+        self.connectBool = False
         self.prevNote = ''
         self.connectStatus = 'Disconnected'
         self.noteLog = []
+        self.disconnectTime = 0
 
         try:
             ConfigData_Filename = os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.json")
@@ -58,12 +59,11 @@ class ProData():
 
         self.setupUi(MainWindow)
         self.connect()
-        self.reconnect_tick()
+
 
     def connect(self):
         # Connect to ProPresenter and setup the necessary callbacks
         self.tryReconnect = True
-        self.disconnectTime = 0
 
         self.ProPresenter = ProPresenterStageDisplayClientComms(self.ProP_IPAddress, self.ProP_IPPort, self.ProP_Password)
         self.ProPresenter.addSubscription("Connected", self.connected)
@@ -76,31 +76,34 @@ class ProData():
 
     def connected(self, data):
         self.connectStatus = "ProPresenter Connected"
+        self.connectBool = True
         self.retranslateUi(MainWindow)
 
     def connectFailed(self, error):
         self.tryReconnect = True
+        self.connectBool = False
         
         if self.disconnectTime == 0:
             self.disconnectTime = time.time()
         
         self.connectStatus = 'ProPresenter Connect Failed'
         self.retranslateUi(MainWindow)
-    
+        self.reconnect_tick()
     def disconnected(self, error):
         self.tryReconnect = True
-        
+        self.connectBool = False
         if self.disconnectTime == 0:
             self.disconnectTime = time.time()
         
         self.connectStatus = "ProPresenter Disconnected"
         self.retranslateUi(MainWindow)
-
+        self.reconnect_tick()
     def reconnect_tick(self):
-        if self.tryReconnect and self.disconnectTime < time.time() - 5:
-            self.connectStatus = "Attempting to reconnect to ProPresenter"
-            self.retranslateUi(MainWindow)
+        if not self.connectBool:
+            self.connectStatus = "Attempting Reconnect"
+            time.sleep(2.5)
             self.connect()
+
         
 
     def updateSlideNotesCurrent(self, data):
