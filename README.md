@@ -10,7 +10,4 @@ You can write your own output code and implement it by simply changing the updat
 2. pyqt5 - https://pypi.org/project/PyQt5/
 3. python-rtmidi - https://pypi.org/project/python-rtmidi/
 
-# Known Bugs
-1. Connection Status does not automatically update
-2. config.json can sometimes be emptied by saveAndConnect method, required it to be rewritten before running the program again.
-3. Automatic reconnection is broken.
+
