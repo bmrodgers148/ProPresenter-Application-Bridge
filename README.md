@@ -20,7 +20,7 @@ The program connects to a socket provided by ProPresenter and listens for the St
 4. Place a ':' after the command, leaving no spaces in between.
 5. Write your data numbers. For most lighting consoles, only the GO Command needs both a Cue Number and A Cuelist number. All other commands only need a Cuelist Number to work. the ALL_OFF Command is the exception. On Onyx (Formerly Martin M-PC), the All_OFF command doesn't need anything after the ':'
 6. To write GO Commands, and other commands needing more than one number, write the cue number, followed by a '-', and then write your Cuelist number. (The '-' is converted to a 00 in hex. Most lighting consoles use this to delimit between the numbers.
-7. If you need to write more then one command, seperate the commandsby a ','.
+7. If you need to write more then one command, seperate the commands by a comma.
 
 Example: "GO:12.3-4,OPEN:4" will send two commands,
   1. Go Cue Number 12.3 in Cuelist Number 4
