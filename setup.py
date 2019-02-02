@@ -7,7 +7,7 @@ Usage:
 
 from setuptools import setup
 
-APP = ['pro6.py']
+APP = ['main.py']
 DATA_FILES = ['config.json']
 OPTIONS = {}
 
