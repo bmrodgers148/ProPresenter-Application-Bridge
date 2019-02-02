@@ -1,2 +1,2 @@
 start
-pro6.py
+pythonw main.py
